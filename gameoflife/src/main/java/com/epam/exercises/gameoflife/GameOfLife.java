@@ -1,4 +1,4 @@
-package java.com.epam.exercises.gameoflife;
+package com.epam.exercises.gameoflife;
 
 import java.awt.Color;
 import java.awt.Dimension;
