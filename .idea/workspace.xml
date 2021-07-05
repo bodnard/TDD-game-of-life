@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9ac73fd2-6c1b-4bbb-ad4e-91aad5818a45" name="Default Changelist" comment="" />
+    <list default="true" id="9ac73fd2-6c1b-4bbb-ad4e-91aad5818a45" name="Default Changelist" comment="folder setup">
+      <change afterPath="$PROJECT_DIR$/gameoflife/src/test/DefaultBoardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameoflife/src/main/java/com/epam/exercises/gameoflife/DefaultBoardTest.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -22,6 +33,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Daniel_Bodnar\OneDrive - EPAM\MEP\training_modules\#25_18_EJ--_TDD-pear programing\TDD-game-of-life\gameoflife\src\test" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
@@ -44,7 +60,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1625489830398</updated>
-      <workItem from="1625489833639" duration="1330000" />
+      <workItem from="1625489833639" duration="1810000" />
     </task>
     <servers />
   </component>
@@ -61,5 +77,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="folder setup" />
+    <option name="LAST_COMMIT_MESSAGE" value="folder setup" />
   </component>
 </project>
