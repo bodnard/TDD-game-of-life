@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 public class DefaultBoardTest {
 
 
@@ -11,7 +13,7 @@ public class DefaultBoardTest {
 
     @Before
     public void setup() {
-         subject = new DefaultBoard();
+        subject = new DefaultBoard();
     }
 
     @Test
@@ -23,9 +25,19 @@ public class DefaultBoardTest {
                 //WHEN
                 boolean result = subject.isAlive(coordinate);
                 //THEN
-                Assert.assertFalse(result);
+                assertFalse(result);
             }
         }
     }
 
+    @Test
+    public void newCellAddedByUser() {
+        //GIVEN
+        Coordinate coordinate = new Coordinate(10, 10);
+        //WHEN
+        subject.insertCell(coordinate);
+        boolean result = subject.isAlive(coordinate);
+        //THEN
+        assertTrue(result);
+    }
 }
