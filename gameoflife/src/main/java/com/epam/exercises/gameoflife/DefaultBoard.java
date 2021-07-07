@@ -6,7 +6,7 @@ public class DefaultBoard implements Board {
 
     @Override
     public Board getNextGenerationBoard() {
-        return Board.super.getNextGenerationBoard();
+        return new DefaultBoard();
     }
 
     @Override
