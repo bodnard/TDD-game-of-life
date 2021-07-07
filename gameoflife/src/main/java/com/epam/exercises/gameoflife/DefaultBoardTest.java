@@ -40,4 +40,23 @@ public class DefaultBoardTest {
         //THEN
         assertTrue(result);
     }
+
+    @Test
+    public void whenZeroNeighborThenDie() {
+        //GIVEN
+        Coordinate coordinate = new Coordinate(10, 10);
+        //WHEN
+        subject.insertCell(coordinate);
+        boolean result = subject.isAlive(coordinate) &&
+            !subject.isAlive(new Coordinate(9, 9)) &&
+            !subject.isAlive(new Coordinate(9, 10)) &&
+            !subject.isAlive(new Coordinate(9, 11)) &&
+            !subject.isAlive(new Coordinate(10, 9)) &&
+            !subject.isAlive(new Coordinate(10, 11)) &&
+            !subject.isAlive(new Coordinate(11, 9)) &&
+            !subject.isAlive(new Coordinate(11, 10)) &&
+            !subject.isAlive(new Coordinate(11, 11));
+        //THEN
+        assertFalse(subject.getNextGenerationBoard().isAlive(coordinate));
+    }
 }
