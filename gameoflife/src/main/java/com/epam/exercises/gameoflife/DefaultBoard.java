@@ -10,7 +10,15 @@ public class DefaultBoard implements Board {
 
     @Override
     public Board getNextGenerationBoard() {
-        return new DefaultBoard();
+        Board nextGen = new DefaultBoard();
+        for (int i = 0; i < aliveCellsList.size(); i++) {
+            Coordinate leftNeighbour = new Coordinate(aliveCellsList.get(i).getPositionX() -1, aliveCellsList.get(i).getPositionY());
+            Coordinate rightNeighbour = new Coordinate(aliveCellsList.get(i).getPositionX() +1, aliveCellsList.get(i).getPositionY());
+            if(isAlive(leftNeighbour) && isAlive(rightNeighbour)) {
+                nextGen.insertCell(aliveCellsList.get(i));
+            }
+        }
+        return nextGen;
     }
 
     @Override
