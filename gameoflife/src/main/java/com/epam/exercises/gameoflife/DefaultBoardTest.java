@@ -47,7 +47,7 @@ public class DefaultBoardTest {
         Coordinate coordinate = new Coordinate(10, 10);
         //WHEN
         subject.insertCell(coordinate);
-        boolean result = subject.isAlive(coordinate) &&
+        boolean condition = subject.isAlive(coordinate) &&
             !subject.isAlive(new Coordinate(9, 9)) &&
             !subject.isAlive(new Coordinate(9, 10)) &&
             !subject.isAlive(new Coordinate(9, 11)) &&
@@ -56,7 +56,9 @@ public class DefaultBoardTest {
             !subject.isAlive(new Coordinate(11, 9)) &&
             !subject.isAlive(new Coordinate(11, 10)) &&
             !subject.isAlive(new Coordinate(11, 11));
+        assertTrue(condition);
+        boolean result = subject.getNextGenerationBoard().isAlive(coordinate);
         //THEN
-        assertFalse(subject.getNextGenerationBoard().isAlive(coordinate));
+        assertFalse(result);
     }
 }
