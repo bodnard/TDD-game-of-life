@@ -2,7 +2,6 @@ package com.epam.exercises.gameoflife;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DefaultBoard implements Board {
     List<Coordinate> coordinate = new ArrayList<>();
@@ -13,10 +12,10 @@ public class DefaultBoard implements Board {
     @Override
     public Board getNextGenerationBoard() {
         Board nextGen = new DefaultBoard();
-        for (int i = 0; i < coordinate.size(); i++) {
-            loadNeighboursCellList(coordinate.get(i));
+        for (Coordinate value : coordinate) {
+            loadNeighboursCellList(value);
             if (neighbourCellsList.stream().filter(this::isAlive).count() == 2) {
-                nextGen.insertCell(coordinate.get(i));
+                nextGen.insertCell(value);
             }
         }
         return nextGen;
