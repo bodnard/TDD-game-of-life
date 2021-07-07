@@ -12,15 +12,40 @@ public class DefaultBoard implements Board {
     public Board getNextGenerationBoard() {
         Board nextGen = new DefaultBoard();
         for (int i = 0; i < aliveCellsList.size(); i++) {
-            Coordinate leftNeighbourX = new Coordinate(aliveCellsList.get(i).getPositionX() - 1, aliveCellsList.get(i).getPositionY());
-            Coordinate rightNeighbourX = new Coordinate(aliveCellsList.get(i).getPositionX() + 1, aliveCellsList.get(i).getPositionY());
-            Coordinate topNeighbourY = new Coordinate(aliveCellsList.get(i).getPositionX(), aliveCellsList.get(i).getPositionY() -1);
-            Coordinate bottomNeighbourY = new Coordinate(aliveCellsList.get(i).getPositionX(), aliveCellsList.get(i).getPositionY() + 1);
-            if (isAlive(leftNeighbourX) && isAlive(rightNeighbourX) || isAlive(topNeighbourY) && isAlive(bottomNeighbourY)) {
+            Coordinate leftNeighbourX = shiftLeftOnX(aliveCellsList.get(i));
+            Coordinate rightNeighbourX = shiftRightOnX(aliveCellsList.get(i));
+
+            Coordinate topNeighbourY = shiftLeftOnY(aliveCellsList.get(i));
+            Coordinate bottomNeighbourY = shiftRightOnY(aliveCellsList.get(i));
+
+            Coordinate topLeftNeighbour = shiftLeftOnX(topNeighbourY);
+            Coordinate bottomRightNeighbour = shiftRightOnX(bottomNeighbourY);
+
+            Coordinate topRightNeighbour = shiftRightOnX(topNeighbourY);
+            Coordinate bottomLeftNeighbour = shiftLeftOnX(bottomNeighbourY);
+
+            if (isAlive(leftNeighbourX) && isAlive(rightNeighbourX) ||
+                isAlive(topNeighbourY) && isAlive(bottomNeighbourY) ||
+                isAlive(topRightNeighbour) && isAlive(bottomLeftNeighbour) ||
+                isAlive(topLeftNeighbour) && isAlive(bottomRightNeighbour) ) {
                 nextGen.insertCell(aliveCellsList.get(i));
             }
         }
         return nextGen;
+    }
+
+    private Coordinate shiftLeftOnX(Coordinate coordinate) {
+        return new Coordinate(coordinate.getPositionX() - 1, coordinate.getPositionY());
+    }
+    private Coordinate shiftRightOnX(Coordinate coordinate) {
+        return new Coordinate(coordinate.getPositionX() + 1, coordinate.getPositionY());
+    }
+
+    private Coordinate shiftLeftOnY(Coordinate coordinate) {
+        return new Coordinate(coordinate.getPositionX(), coordinate.getPositionY() - 1);
+    }
+    private Coordinate shiftRightOnY(Coordinate coordinate) {
+        return new Coordinate(coordinate.getPositionX(), coordinate.getPositionY() + 1);
     }
 
     @Override
