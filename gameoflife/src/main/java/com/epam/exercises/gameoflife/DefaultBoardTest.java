@@ -1,6 +1,5 @@
 package com.epam.exercises.gameoflife;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -48,14 +47,14 @@ public class DefaultBoardTest {
         //WHEN
         subject.insertCell(coordinate);
         boolean condition = subject.isAlive(coordinate) &&
-                !subject.isAlive(new Coordinate(9, 9)) &&
-                !subject.isAlive(new Coordinate(9, 10)) &&
-                !subject.isAlive(new Coordinate(9, 11)) &&
-                !subject.isAlive(new Coordinate(10, 9)) &&
-                !subject.isAlive(new Coordinate(10, 11)) &&
-                !subject.isAlive(new Coordinate(11, 9)) &&
-                !subject.isAlive(new Coordinate(11, 10)) &&
-                !subject.isAlive(new Coordinate(11, 11));
+            !subject.isAlive(new Coordinate(9, 9)) &&
+            !subject.isAlive(new Coordinate(9, 10)) &&
+            !subject.isAlive(new Coordinate(9, 11)) &&
+            !subject.isAlive(new Coordinate(10, 9)) &&
+            !subject.isAlive(new Coordinate(10, 11)) &&
+            !subject.isAlive(new Coordinate(11, 9)) &&
+            !subject.isAlive(new Coordinate(11, 10)) &&
+            !subject.isAlive(new Coordinate(11, 11));
         assertTrue(condition);
         boolean result = subject.getNextGenerationBoard().isAlive(coordinate);
         //THEN
@@ -71,14 +70,14 @@ public class DefaultBoardTest {
         subject.insertCell(coordinateCentral);
         subject.insertCell(coordinateNeighbour);
         boolean condition = subject.isAlive(coordinateCentral) &&
-                !subject.isAlive(new Coordinate(9, 9)) &&
-                !subject.isAlive(new Coordinate(9, 10)) &&
-                !subject.isAlive(new Coordinate(9, 11)) &&
-                !subject.isAlive(new Coordinate(10, 9)) &&
-                !subject.isAlive(new Coordinate(10, 11)) &&
-                !subject.isAlive(new Coordinate(11, 9)) &&
-                subject.isAlive(coordinateNeighbour) &&
-                !subject.isAlive(new Coordinate(11, 11));
+            !subject.isAlive(new Coordinate(9, 9)) &&
+            !subject.isAlive(new Coordinate(9, 10)) &&
+            !subject.isAlive(new Coordinate(9, 11)) &&
+            !subject.isAlive(new Coordinate(10, 9)) &&
+            !subject.isAlive(new Coordinate(10, 11)) &&
+            !subject.isAlive(new Coordinate(11, 9)) &&
+            subject.isAlive(coordinateNeighbour) &&
+            !subject.isAlive(new Coordinate(11, 11));
         assertTrue(condition);
         boolean result = subject.getNextGenerationBoard().isAlive(coordinateCentral);
         //THEN
@@ -86,24 +85,24 @@ public class DefaultBoardTest {
     }
 
     @Test
-    public void whenTwoHorizontalNeighboursAndAliveThenSurvives() {
+    public void whenAliveAndTwoNeighboursAreOnTheHorizontalAxesSurvives() {
         //GIVEN
         Coordinate coordinateCentral = new Coordinate(10, 10);
-        Coordinate coordinateNeighbour1 = new Coordinate(11, 10);
-        Coordinate coordinateNeighbour2 = new Coordinate(9, 10);
+        Coordinate coordinateNeighbourRight = new Coordinate(11, 10);
+        Coordinate coordinateNeighbourLeft = new Coordinate(9, 10);
         //WHEN
         subject.insertCell(coordinateCentral);
-        subject.insertCell(coordinateNeighbour1);
-        subject.insertCell(coordinateNeighbour2);
+        subject.insertCell(coordinateNeighbourRight);
+        subject.insertCell(coordinateNeighbourLeft);
         boolean condition = subject.isAlive(coordinateCentral) &&
-                subject.isAlive(coordinateNeighbour2) &&
-                subject.isAlive(coordinateNeighbour1) &&
-                !subject.isAlive(new Coordinate(9, 9)) &&
-                !subject.isAlive(new Coordinate(9, 11)) &&
-                !subject.isAlive(new Coordinate(10, 9)) &&
-                !subject.isAlive(new Coordinate(10, 11)) &&
-                !subject.isAlive(new Coordinate(11, 9)) &&
-                !subject.isAlive(new Coordinate(11, 11));
+            subject.isAlive(coordinateNeighbourLeft) &&
+            subject.isAlive(coordinateNeighbourRight) &&
+            !subject.isAlive(new Coordinate(9, 9)) &&
+            !subject.isAlive(new Coordinate(9, 11)) &&
+            !subject.isAlive(new Coordinate(10, 9)) &&
+            !subject.isAlive(new Coordinate(10, 11)) &&
+            !subject.isAlive(new Coordinate(11, 9)) &&
+            !subject.isAlive(new Coordinate(11, 11));
         assertTrue(condition);
         boolean result = subject.getNextGenerationBoard().isAlive(coordinateCentral);
         //THEN
@@ -111,24 +110,74 @@ public class DefaultBoardTest {
     }
 
     @Test
-    public void whenTwoVerticalNeighboursAndAliveThenSurvives() {
+    public void whenAliveAndTwoNeighboursAreOnTheVerticalAxesSurvives() {
         //GIVEN
         Coordinate coordinateCentral = new Coordinate(10, 10);
-        Coordinate coordinateNeighbour1 = new Coordinate(10, 9);
-        Coordinate coordinateNeighbour2 = new Coordinate(10, 11);
+        Coordinate coordinateNeighbourTop = new Coordinate(10, 9);
+        Coordinate coordinateNeighbourBottom = new Coordinate(10, 11);
         //WHEN
         subject.insertCell(coordinateCentral);
-        subject.insertCell(coordinateNeighbour1);
-        subject.insertCell(coordinateNeighbour2);
+        subject.insertCell(coordinateNeighbourTop);
+        subject.insertCell(coordinateNeighbourBottom);
         boolean condition = subject.isAlive(coordinateCentral) &&
-                subject.isAlive(coordinateNeighbour2) &&
-                subject.isAlive(coordinateNeighbour1) &&
-                !subject.isAlive(new Coordinate(9, 9)) &&
-                !subject.isAlive(new Coordinate(9, 10)) &&
-                !subject.isAlive(new Coordinate(9, 11)) &&
-                !subject.isAlive(new Coordinate(11, 9)) &&
-                !subject.isAlive(new Coordinate(11, 10)) &&
-                !subject.isAlive(new Coordinate(11, 11));
+            subject.isAlive(coordinateNeighbourBottom) &&
+            subject.isAlive(coordinateNeighbourTop) &&
+            !subject.isAlive(new Coordinate(9, 9)) &&
+            !subject.isAlive(new Coordinate(9, 10)) &&
+            !subject.isAlive(new Coordinate(9, 11)) &&
+            !subject.isAlive(new Coordinate(11, 9)) &&
+            !subject.isAlive(new Coordinate(11, 10)) &&
+            !subject.isAlive(new Coordinate(11, 11));
+        assertTrue(condition);
+        boolean result = subject.getNextGenerationBoard().isAlive(coordinateCentral);
+        //THEN
+        assertTrue(result);
+    }
+
+    @Test
+    public void whenAliveAndTwoNeighboursAreOnTheLeftDiagonalAxesSurvives() {
+        //GIVEN
+        Coordinate coordinateCentral = new Coordinate(10, 10);
+        Coordinate coordinateNeighbourTopLeft = new Coordinate(9, 9);
+        Coordinate coordinateNeighbourBottomRight = new Coordinate(11, 11);
+        //WHEN
+        subject.insertCell(coordinateCentral);
+        subject.insertCell(coordinateNeighbourTopLeft);
+        subject.insertCell(coordinateNeighbourBottomRight);
+        boolean condition = subject.isAlive(coordinateCentral) &&
+            subject.isAlive(coordinateNeighbourBottomRight) &&
+            subject.isAlive(coordinateNeighbourTopLeft) &&
+            !subject.isAlive(new Coordinate(9, 10)) &&
+            !subject.isAlive(new Coordinate(9, 11)) &&
+            !subject.isAlive(new Coordinate(10, 11)) &&
+            !subject.isAlive(new Coordinate(10, 9)) &&
+            !subject.isAlive(new Coordinate(11, 9)) &&
+            !subject.isAlive(new Coordinate(11, 10));
+        assertTrue(condition);
+        boolean result = subject.getNextGenerationBoard().isAlive(coordinateCentral);
+        //THEN
+        assertTrue(result);
+    }
+
+    @Test
+    public void whenAliveAndTwoNeighboursAreOnTheRightDiagonalAxesSurvives() {
+        //GIVEN
+        Coordinate coordinateCentral = new Coordinate(10, 10);
+        Coordinate coordinateNeighbourTopRight = new Coordinate(11, 9);
+        Coordinate coordinateNeighbourBottomLeft = new Coordinate(9, 11);
+        //WHEN
+        subject.insertCell(coordinateCentral);
+        subject.insertCell(coordinateNeighbourTopRight);
+        subject.insertCell(coordinateNeighbourBottomLeft);
+        boolean condition = subject.isAlive(coordinateCentral) &&
+            subject.isAlive(coordinateNeighbourBottomLeft) &&
+            subject.isAlive(coordinateNeighbourTopRight) &&
+            !subject.isAlive(new Coordinate(9, 9)) &&
+            !subject.isAlive(new Coordinate(9, 10)) &&
+            !subject.isAlive(new Coordinate(10, 9)) &&
+            !subject.isAlive(new Coordinate(10, 11)) &&
+            !subject.isAlive(new Coordinate(11, 10)) &&
+            !subject.isAlive(new Coordinate(11, 11));
         assertTrue(condition);
         boolean result = subject.getNextGenerationBoard().isAlive(coordinateCentral);
         //THEN
