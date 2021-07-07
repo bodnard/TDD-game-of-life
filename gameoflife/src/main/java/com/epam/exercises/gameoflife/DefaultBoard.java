@@ -1,7 +1,11 @@
 package com.epam.exercises.gameoflife;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DefaultBoard implements Board {
-    Coordinate last;
+    List<Coordinate> aliveCellsList = new ArrayList<>();
+    Coordinate actual;
 
 
     @Override
@@ -11,11 +15,18 @@ public class DefaultBoard implements Board {
 
     @Override
     public void insertCell(Coordinate coordinate) {
-        last = coordinate;
+        addToAliveCellsToList(coordinate);
+        actual = coordinate;
     }
 
     @Override
     public boolean isAlive(Coordinate coordinate) {
-        return coordinate.equals(last);
+        return aliveCellsList.contains(coordinate);
+    }
+
+    private void addToAliveCellsToList(Coordinate actual) {
+        if (!isAlive(actual)) {
+            aliveCellsList.add(actual);
+        }
     }
 }

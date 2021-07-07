@@ -63,7 +63,7 @@ public class DefaultBoardTest {
     }
 
     @Test
-    public void whenOneNeighborThenDie() {
+    public void whenOneNeighbourThenDie() {
         //GIVEN
         Coordinate coordinateCentral = new Coordinate(10, 10);
         Coordinate coordinateNeighbour = new Coordinate(11, 10);
