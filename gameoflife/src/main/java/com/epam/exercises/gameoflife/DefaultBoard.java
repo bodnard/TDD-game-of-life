@@ -2,33 +2,21 @@ package com.epam.exercises.gameoflife;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DefaultBoard implements Board {
-    List<Coordinate> aliveCellsList = new ArrayList<>();
+    List<Coordinate> coordinate = new ArrayList<>();
+    List<Coordinate> neighbourCellsList = new ArrayList<>();
     Coordinate actual;
 
 
     @Override
     public Board getNextGenerationBoard() {
         Board nextGen = new DefaultBoard();
-        for (int i = 0; i < aliveCellsList.size(); i++) {
-            Coordinate leftNeighbourX = shiftLeftOnX(aliveCellsList.get(i));
-            Coordinate rightNeighbourX = shiftRightOnX(aliveCellsList.get(i));
-
-            Coordinate topNeighbourY = shiftLeftOnY(aliveCellsList.get(i));
-            Coordinate bottomNeighbourY = shiftRightOnY(aliveCellsList.get(i));
-
-            Coordinate topLeftNeighbour = shiftLeftOnX(topNeighbourY);
-            Coordinate bottomRightNeighbour = shiftRightOnX(bottomNeighbourY);
-
-            Coordinate topRightNeighbour = shiftRightOnX(topNeighbourY);
-            Coordinate bottomLeftNeighbour = shiftLeftOnX(bottomNeighbourY);
-
-            if (isAlive(leftNeighbourX) && isAlive(rightNeighbourX) ||
-                isAlive(topNeighbourY) && isAlive(bottomNeighbourY) ||
-                isAlive(topRightNeighbour) && isAlive(bottomLeftNeighbour) ||
-                isAlive(topLeftNeighbour) && isAlive(bottomRightNeighbour) ) {
-                nextGen.insertCell(aliveCellsList.get(i));
+        for (int i = 0; i < coordinate.size(); i++) {
+            loadNeighboursCellList(coordinate.get(i));
+            if (neighbourCellsList.stream().filter(this::isAlive).count() == 2) {
+                nextGen.insertCell(coordinate.get(i));
             }
         }
         return nextGen;
@@ -37,6 +25,7 @@ public class DefaultBoard implements Board {
     private Coordinate shiftLeftOnX(Coordinate coordinate) {
         return new Coordinate(coordinate.getPositionX() - 1, coordinate.getPositionY());
     }
+
     private Coordinate shiftRightOnX(Coordinate coordinate) {
         return new Coordinate(coordinate.getPositionX() + 1, coordinate.getPositionY());
     }
@@ -44,6 +33,7 @@ public class DefaultBoard implements Board {
     private Coordinate shiftLeftOnY(Coordinate coordinate) {
         return new Coordinate(coordinate.getPositionX(), coordinate.getPositionY() - 1);
     }
+
     private Coordinate shiftRightOnY(Coordinate coordinate) {
         return new Coordinate(coordinate.getPositionX(), coordinate.getPositionY() + 1);
     }
@@ -56,12 +46,36 @@ public class DefaultBoard implements Board {
 
     @Override
     public boolean isAlive(Coordinate coordinate) {
-        return aliveCellsList.contains(coordinate);
+        return this.coordinate.contains(coordinate);
     }
 
     private void addToAliveCellsToList(Coordinate actual) {
         if (!isAlive(actual)) {
-            aliveCellsList.add(actual);
+            coordinate.add(actual);
         }
+    }
+
+    private void loadNeighboursCellList(Coordinate coordinate) {
+        Coordinate leftNeighbourX = shiftLeftOnX(coordinate);
+        Coordinate rightNeighbourX = shiftRightOnX(coordinate);
+
+        Coordinate topNeighbourY = shiftLeftOnY(coordinate);
+        Coordinate bottomNeighbourY = shiftRightOnY(coordinate);
+
+        Coordinate topLeftNeighbour = shiftLeftOnX(topNeighbourY);
+        Coordinate bottomRightNeighbour = shiftRightOnX(bottomNeighbourY);
+
+        Coordinate topRightNeighbour = shiftRightOnX(topNeighbourY);
+        Coordinate bottomLeftNeighbour = shiftLeftOnX(bottomNeighbourY);
+        neighbourCellsList = List.of(
+                topLeftNeighbour,
+                topNeighbourY,
+                topRightNeighbour,
+                leftNeighbourX,
+                rightNeighbourX,
+                bottomLeftNeighbour,
+                bottomNeighbourY,
+                bottomRightNeighbour
+        );
     }
 }
