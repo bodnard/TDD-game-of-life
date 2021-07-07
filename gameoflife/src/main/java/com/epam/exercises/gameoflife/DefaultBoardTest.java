@@ -86,7 +86,7 @@ public class DefaultBoardTest {
     }
 
     @Test
-    public void whenTwoNeighboursAndAliveThenSurvives() {
+    public void whenTwoHorizontalNeighboursAndAliveThenSurvives() {
         //GIVEN
         Coordinate coordinateCentral = new Coordinate(10, 10);
         Coordinate coordinateNeighbour1 = new Coordinate(11, 10);
@@ -103,6 +103,31 @@ public class DefaultBoardTest {
                 !subject.isAlive(new Coordinate(10, 9)) &&
                 !subject.isAlive(new Coordinate(10, 11)) &&
                 !subject.isAlive(new Coordinate(11, 9)) &&
+                !subject.isAlive(new Coordinate(11, 11));
+        assertTrue(condition);
+        boolean result = subject.getNextGenerationBoard().isAlive(coordinateCentral);
+        //THEN
+        assertTrue(result);
+    }
+
+    @Test
+    public void whenTwoVerticalNeighboursAndAliveThenSurvives() {
+        //GIVEN
+        Coordinate coordinateCentral = new Coordinate(10, 10);
+        Coordinate coordinateNeighbour1 = new Coordinate(10, 9);
+        Coordinate coordinateNeighbour2 = new Coordinate(10, 11);
+        //WHEN
+        subject.insertCell(coordinateCentral);
+        subject.insertCell(coordinateNeighbour1);
+        subject.insertCell(coordinateNeighbour2);
+        boolean condition = subject.isAlive(coordinateCentral) &&
+                subject.isAlive(coordinateNeighbour2) &&
+                subject.isAlive(coordinateNeighbour1) &&
+                !subject.isAlive(new Coordinate(9, 9)) &&
+                !subject.isAlive(new Coordinate(9, 10)) &&
+                !subject.isAlive(new Coordinate(9, 11)) &&
+                !subject.isAlive(new Coordinate(11, 9)) &&
+                !subject.isAlive(new Coordinate(11, 10)) &&
                 !subject.isAlive(new Coordinate(11, 11));
         assertTrue(condition);
         boolean result = subject.getNextGenerationBoard().isAlive(coordinateCentral);

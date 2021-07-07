@@ -12,9 +12,11 @@ public class DefaultBoard implements Board {
     public Board getNextGenerationBoard() {
         Board nextGen = new DefaultBoard();
         for (int i = 0; i < aliveCellsList.size(); i++) {
-            Coordinate leftNeighbour = new Coordinate(aliveCellsList.get(i).getPositionX() -1, aliveCellsList.get(i).getPositionY());
-            Coordinate rightNeighbour = new Coordinate(aliveCellsList.get(i).getPositionX() +1, aliveCellsList.get(i).getPositionY());
-            if(isAlive(leftNeighbour) && isAlive(rightNeighbour)) {
+            Coordinate leftNeighbourX = new Coordinate(aliveCellsList.get(i).getPositionX() - 1, aliveCellsList.get(i).getPositionY());
+            Coordinate rightNeighbourX = new Coordinate(aliveCellsList.get(i).getPositionX() + 1, aliveCellsList.get(i).getPositionY());
+            Coordinate topNeighbourY = new Coordinate(aliveCellsList.get(i).getPositionX(), aliveCellsList.get(i).getPositionY() -1);
+            Coordinate bottomNeighbourY = new Coordinate(aliveCellsList.get(i).getPositionX(), aliveCellsList.get(i).getPositionY() + 1);
+            if (isAlive(leftNeighbourX) && isAlive(rightNeighbourX) || isAlive(topNeighbourY) && isAlive(bottomNeighbourY)) {
                 nextGen.insertCell(aliveCellsList.get(i));
             }
         }
