@@ -61,4 +61,28 @@ public class DefaultBoardTest {
         //THEN
         assertFalse(result);
     }
+
+    @Test
+    public void whenOneNeighborThenDie() {
+        //GIVEN
+        Coordinate coordinateCentral = new Coordinate(10, 10);
+        Coordinate coordinateNeighbour = new Coordinate(11, 10);
+        //WHEN
+        subject.insertCell(coordinateCentral);
+        subject.insertCell(coordinateNeighbour);
+        boolean condition = subject.isAlive(coordinateCentral) &&
+            !subject.isAlive(new Coordinate(9, 9)) &&
+            !subject.isAlive(new Coordinate(9, 10)) &&
+            !subject.isAlive(new Coordinate(9, 11)) &&
+            !subject.isAlive(new Coordinate(10, 9)) &&
+            !subject.isAlive(new Coordinate(10, 11)) &&
+            !subject.isAlive(new Coordinate(11, 9)) &&
+            subject.isAlive(coordinateNeighbour) &&
+            !subject.isAlive(new Coordinate(11, 11));
+        assertTrue(condition);
+        boolean result = subject.getNextGenerationBoard().isAlive(coordinateCentral);
+        //THEN
+        assertFalse(result);
+    }
+
 }
