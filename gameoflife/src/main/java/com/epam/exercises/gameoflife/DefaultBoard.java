@@ -2,9 +2,11 @@ package com.epam.exercises.gameoflife;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DefaultBoard implements Board {
-    List<Coordinate> coordinate = new ArrayList<>();
+    List<Coordinate> aliveCellsList = new ArrayList<>();
     List<Coordinate> neighbourCellsList = new ArrayList<>();
     Coordinate actual;
 
@@ -12,11 +14,21 @@ public class DefaultBoard implements Board {
     @Override
     public Board getNextGenerationBoard() {
         Board nextGen = new DefaultBoard();
-        for (Coordinate value : coordinate) {
-            loadNeighboursCellList(value);
-            if (neighbourCellsList.stream().filter(this::isAlive).count() == 2 ||
-                    neighbourCellsList.stream().filter(this::isAlive).count() == 3) {
-                nextGen.insertCell(value);
+        for (Coordinate currentAliveCell : aliveCellsList) {
+            loadNeighboursCellList(currentAliveCell);
+            long countAlives = neighbourCellsList.stream().filter(this::isAlive).count();
+            if (countAlives == 2 || countAlives == 3) {
+                nextGen.insertCell(currentAliveCell);
+            }
+            List<Coordinate> deadNeighboursCellList = neighbourCellsList.stream()
+                    .filter(coordinate -> !isAlive(coordinate))
+                    .collect(Collectors.toList());
+            for (Coordinate currentDeadCell : deadNeighboursCellList) {
+                loadNeighboursCellList(currentDeadCell);
+                long countNeighboursOfDead = neighbourCellsList.stream().filter(this::isAlive).count();
+                if (countNeighboursOfDead == 3) {
+                    nextGen.insertCell(currentDeadCell);
+                }
             }
         }
         return nextGen;
@@ -46,12 +58,12 @@ public class DefaultBoard implements Board {
 
     @Override
     public boolean isAlive(Coordinate coordinate) {
-        return this.coordinate.contains(coordinate);
+        return this.aliveCellsList.contains(coordinate);
     }
 
     private void addToAliveCellsToList(Coordinate actual) {
         if (!isAlive(actual)) {
-            coordinate.add(actual);
+            aliveCellsList.add(actual);
         }
     }
 
