@@ -14,7 +14,8 @@ public class DefaultBoard implements Board {
         Board nextGen = new DefaultBoard();
         for (Coordinate value : coordinate) {
             loadNeighboursCellList(value);
-            if (neighbourCellsList.stream().filter(this::isAlive).count() == 2) {
+            if (neighbourCellsList.stream().filter(this::isAlive).count() == 2 ||
+                    neighbourCellsList.stream().filter(this::isAlive).count() == 3) {
                 nextGen.insertCell(value);
             }
         }
